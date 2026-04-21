@@ -5,7 +5,7 @@ import testIds from '@app/utils/test-ids';
 export default function Home() {
   return (
     <div className="mx-auto relative sm:px-20 py-5">
-      {/* Header Area */}
+      {/* Header / Search Tool Section */}
       <div className="text-center w-full relative">
         <div className="absolute top-0 left-0 h-[200px] sm:h-[calc(100%-55px)] w-full bg-black opacity-50"></div>
         <video autoPlay muted loop className="w-full h-[200px] sm:h-fit">
@@ -15,18 +15,27 @@ export default function Home() {
           />
         </video>
         <div className="absolute top-[40px] right-[30px] sm:top-2/4 sm:left-2/4 text-white sm:translate-y-[-50%] sm:translate-x-[-50%] font-site">
-          <h2 className="sm:text-4xl mb-4">COMMUNITY TO COUNCIL</h2>
-          <h1 className="sm:text-[90px] sm:leading-[90px]">
-            FIND YOUR REPS
+          <h2 className="sm:text-4xl mb-4 font-bold tracking-widest">
+            COMMUNITY TO COUNCIL
+          </h2>
+          <h1 className="sm:text-[60px] sm:leading-[70px]">
+            YOUR VOICE MATTERS
           </h1>
         </div>
-        <div className="flex flex-col sm:flex-row relative items-center bg-white mt-[-10px] sm:mt-[-55px] mx-auto max-w-xs sm:max-w-4xl border-t-4 border-blue-site font-site">
-          <h3 className="flex-1 sm:text-3xl py-4 px-8 text-center sm:text-left">
-            Enter your Zip Code to find officials
+        
+        {/* Zip Code Search Bar */}
+        <div className="flex flex-col sm:flex-row relative items-center bg-white mt-[-10px] sm:mt-[-55px] mx-auto max-w-xs sm:max-w-4xl border-t-4 border-blue-site font-site p-4 sm:p-0">
+          <h3 className="flex-1 sm:text-2xl py-4 px-8 text-center sm:text-left">
+            Find local & state officials:
           </h3>
+          <input 
+            type="text" 
+            placeholder="Enter Zip Code" 
+            className="border-2 border-gray-300 p-3 sm:mr-4 mb-4 sm:mb-0 text-lg w-full sm:w-auto"
+          />
           <a
-            href="/search"
-            className="btn-main sm:text-2xl sm:p-8 hover:bg-purple-site w-fit"
+            href="#search"
+            className="btn-main sm:text-xl sm:p-6 hover:bg-purple-site w-fit bg-blue-site text-white"
           >
             SEARCH
           </a>
@@ -37,6 +46,7 @@ export default function Home() {
         className="flex mt-12 sm:mt-32 sm:gap-12 flex-col sm:flex-row"
         data-testid={testIds.HOME_PAGE.HIGHLIGHTS}
       >
+        {/* Mission Statement */}
         <div className="basis-1/3">
           <div className="h-[370px] relative">
             <WixMediaImage
@@ -46,21 +56,22 @@ export default function Home() {
               disableZoom={true}
             />
           </div>
-          {/* General Info: Email/Call Guidelines */}
           <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:mt-[-300px]">
-            <h3 className="text-2xl font-site">Contact Guide</h3>
+            <h3 className="text-2xl font-site">Mission Statement</h3>
             <p className="my-6 text-sm">
-              Learn how to properly phrase emails and calls to your government officials. Be polite, state your zip code, and make your request clear and concise. 
+              Placeholder
             </p>
             <a
-              href="/templates"
+              href="#mission"
               className="text-purple-site py-6 font-site"
               data-testid={testIds.HOME_PAGE.OUR_INITIATIVES_CTA}
             >
-              Email Templates
+              Read More
             </a>
           </div>
         </div>
+
+        {/* General Info: Email & Call Templates */}
         <div className="basis-2/3">
           <div className="h-[370px] relative">
             <WixMediaImage
@@ -70,20 +81,21 @@ export default function Home() {
               disableZoom={true}
             />
           </div>
-          {/* Mission Statement */}
-          <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:ml-32 sm:mt-[-430px]">
-            <h3 className="text-2xl font-site">Our Mission</h3>
+          <div className="border-y-4 border-blue-site p-8 sm:w-80 relative bg-white sm:ml-32 sm:mt-[-430px]">
+            <h3 className="text-2xl font-site">Contact Templates</h3>
             <p className="my-6 text-sm">
+              <strong>Email/Call Script:</strong><br/><br/>
               Placeholder
             </p>
-            <a href="/about" className="text-purple-site py-6 font-site">
-              Read More
+            <a href="#templates" className="text-purple-site py-6 font-site">
+              View All Templates
             </a>
           </div>
         </div>
       </div>
-      
+
       <div className="flex flex-col sm:flex-row sm:mt-32 mb-12 sm:gap-12">
+        {/* General Info: Rights & Election Dates */}
         <div className="basis-2/3">
           <div className="h-[370px] sm:h-[470px] relative">
             <WixMediaImage
@@ -93,17 +105,18 @@ export default function Home() {
               disableZoom={true}
             />
           </div>
-          {/* General Info: Basic Rights */}
           <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:ml-44 sm:mt-[-230px]">
-            <h3 className="text-2xl font-site">Know Your Rights</h3>
+            <h3 className="text-2xl font-site">Rights & Elections</h3>
             <p className="my-6 text-sm">
               Placeholder
             </p>
-            <a href="/rights" className="text-purple-site py-6 font-site">
-              Read More
+            <a href="#elections" className="text-purple-site py-6 font-site">
+              Check Election Dates
             </a>
           </div>
         </div>
+
+        {/* About Us */}
         <div className="basis-1/3">
           <div className="h-[370px] sm:h-[470px] relative">
             <WixMediaImage
@@ -113,35 +126,58 @@ export default function Home() {
               disableZoom={true}
             />
           </div>
-          {/* General Info: Election Dates */}
           <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:ml-32 sm:mt-[-530px]">
-            <h3 className="text-2xl font-site">Election Dates</h3>
+            <h3 className="text-2xl font-site">About Us</h3>
             <p className="my-6 text-sm">
               Placeholder
             </p>
-            <a href="/elections" className="text-purple-site py-6 font-site">
-              View Calendar
+            <a href="#about" className="text-purple-site py-6 font-site">
+              Our Story
             </a>
           </div>
         </div>
       </div>
 
-      {/* About Us Section */}
       <h2 className="text-3xl sm:text-5xl text-center mb-10 sm:mb-20 font-site">
-        About Us
+        Civic Engagement
       </h2>
-      <div className="flex flex-col sm:flex-row gap-8 sm:justify-center items-center font-site max-w-4xl mx-auto px-4">
-        <p className="text-center sm:text-xl leading-relaxed mb-10">
-          Placeholder
-        </p>
+      <div className="flex flex-col sm:flex-row gap-8 sm:justify-between items-center font-site">
+        <div className="relative text-center sm:text-left">
+          <span className="text-4xl sm:text-[200px] block sm:leading-[200px] text-purple-site">
+            50
+          </span>
+          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:right-[-40px] sm:top-[190px]">
+            States
+            <br />
+            Covered
+          </span>
+        </div>
+        <div className="relative text-center sm:text-left">
+          <span className="text-4xl sm:text-[200px] sm:leading-[200px] text-purple-site">
+            19K
+          </span>
+          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:top-[50px] sm:left-[130px] bg-white">
+            Cities &
+            <br />
+            Towns
+          </span>
+        </div>
+        <div className="relative text-center sm:text-left">
+          <span className="text-4xl sm:text-[200px] sm:leading-[200px] text-purple-site">
+            1
+          </span>
+          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:top-[130px] sm:left-[100px] bg-white">
+            Shared
+            <br />
+            Voice
+          </span>
+        </div>
       </div>
-
+      
       <CarouselClient />
 
-      {/* Footer */}
-      <footer className="mt-10 pb-10">
-        {/* Blank for now */}
-      </footer>
+      {/* Blank Footer */}
+      <footer className="h-20 w-full mt-10"></footer>
     </div>
   );
 }
