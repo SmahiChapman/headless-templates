@@ -5,7 +5,6 @@ import testIds from '@app/utils/test-ids';
 export default function Home() {
   return (
     <div className="mx-auto relative sm:px-20 py-5">
-      {/* Header / Search Tool Section */}
       <div className="text-center w-full relative">
         <div className="absolute top-0 left-0 h-[200px] sm:h-[calc(100%-55px)] w-full bg-black opacity-50"></div>
         <video autoPlay muted loop className="w-full h-[200px] sm:h-fit">
@@ -15,29 +14,20 @@ export default function Home() {
           />
         </video>
         <div className="absolute top-[40px] right-[30px] sm:top-2/4 sm:left-2/4 text-white sm:translate-y-[-50%] sm:translate-x-[-50%] font-site">
-          <h2 className="sm:text-4xl mb-4 font-bold tracking-widest">
-            COMMUNITY TO COUNCIL
-          </h2>
-          <h1 className="sm:text-[60px] sm:leading-[70px]">
-            YOUR VOICE MATTERS
+          <h2 className="sm:text-4xl mb-4">FREE & ACCESSIBLE</h2>
+          <h1 className="sm:text-[90px] sm:leading-[90px]">
+            EDUCATION FOR ALL
           </h1>
         </div>
-        
-        {/* Zip Code Search Bar */}
-        <div className="flex flex-col sm:flex-row relative items-center bg-white mt-[-10px] sm:mt-[-55px] mx-auto max-w-xs sm:max-w-4xl border-t-4 border-blue-site font-site p-4 sm:p-0">
-          <h3 className="flex-1 sm:text-2xl py-4 px-8 text-center sm:text-left">
-            Find local & state officials:
+        <div className="flex flex-col sm:flex-row relative items-center bg-white mt-[-10px] sm:mt-[-55px] mx-auto max-w-xs sm:max-w-4xl border-t-4 border-blue-site font-site">
+          <h3 className="flex-1 sm:text-3xl py-4 px-8 text-center sm:text-left">
+            Take action to help us grow
           </h3>
-          <input 
-            type="text" 
-            placeholder="Enter Zip Code" 
-            className="border-2 border-gray-300 p-3 sm:mr-4 mb-4 sm:mb-0 text-lg w-full sm:w-auto"
-          />
           <a
-            href="#search"
-            className="btn-main sm:text-xl sm:p-6 hover:bg-purple-site w-fit bg-blue-site text-white"
+            href="/contact"
+            className="btn-main sm:text-2xl sm:p-8 hover:bg-purple-site w-fit"
           >
-            SEARCH
+            DONATE
           </a>
         </div>
       </div>
@@ -46,7 +36,6 @@ export default function Home() {
         className="flex mt-12 sm:mt-32 sm:gap-12 flex-col sm:flex-row"
         data-testid={testIds.HOME_PAGE.HIGHLIGHTS}
       >
-        {/* Mission Statement */}
         <div className="basis-1/3">
           <div className="h-[370px] relative">
             <WixMediaImage
@@ -57,12 +46,14 @@ export default function Home() {
             />
           </div>
           <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:mt-[-300px]">
-            <h3 className="text-2xl font-site">Mission Statement</h3>
+            <h3 className="text-2xl font-site">Our Initiatives</h3>
             <p className="my-6 text-sm">
-              Placeholder
+              Our initiatives bring people together to help solve real problems
+              and evoke a positive change. Explore our initiatives and see what
+              you can do to help.
             </p>
             <a
-              href="#mission"
+              href="/projects"
               className="text-purple-site py-6 font-site"
               data-testid={testIds.HOME_PAGE.OUR_INITIATIVES_CTA}
             >
@@ -70,8 +61,6 @@ export default function Home() {
             </a>
           </div>
         </div>
-
-        {/* General Info: Email & Call Templates */}
         <div className="basis-2/3">
           <div className="h-[370px] relative">
             <WixMediaImage
@@ -81,21 +70,22 @@ export default function Home() {
               disableZoom={true}
             />
           </div>
-          <div className="border-y-4 border-blue-site p-8 sm:w-80 relative bg-white sm:ml-32 sm:mt-[-430px]">
-            <h3 className="text-2xl font-site">Contact Templates</h3>
+          <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:ml-32 sm:mt-[-430px]">
+            <h3 className="text-2xl font-site">Our Mission</h3>
             <p className="my-6 text-sm">
-              <strong>Email/Call Script:</strong><br/><br/>
-              Placeholder
+              We believe that education is a human right and a powerful tool for
+              social change. We provide educational projects, learning resources
+              and mentoring programs for kids of all ages and backgrounds. We
+              aim to create a world where everyone has the opportunity to learn
+              and grow.
             </p>
-            <a href="#templates" className="text-purple-site py-6 font-site">
-              View All Templates
+            <a href="/about" className="text-purple-site py-6 font-site">
+              Read More
             </a>
           </div>
         </div>
       </div>
-
       <div className="flex flex-col sm:flex-row sm:mt-32 mb-12 sm:gap-12">
-        {/* General Info: Rights & Election Dates */}
         <div className="basis-2/3">
           <div className="h-[370px] sm:h-[470px] relative">
             <WixMediaImage
@@ -106,17 +96,16 @@ export default function Home() {
             />
           </div>
           <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:ml-44 sm:mt-[-230px]">
-            <h3 className="text-2xl font-site">Rights & Elections</h3>
+            <h3 className="text-2xl font-site">Recent News</h3>
             <p className="my-6 text-sm">
-              Placeholder
+              Get caught up on recent news and our latest achievements in the
+              world of education.
             </p>
-            <a href="#elections" className="text-purple-site py-6 font-site">
-              Check Election Dates
+            <a href="/news" className="text-purple-site py-6 font-site">
+              Read More
             </a>
           </div>
         </div>
-
-        {/* About Us */}
         <div className="basis-1/3">
           <div className="h-[370px] sm:h-[470px] relative">
             <WixMediaImage
@@ -127,57 +116,55 @@ export default function Home() {
             />
           </div>
           <div className="border-y-4 border-blue-site p-8 sm:w-60 relative bg-white sm:ml-32 sm:mt-[-530px]">
-            <h3 className="text-2xl font-site">About Us</h3>
+            <h3 className="text-2xl font-site">Take Part</h3>
             <p className="my-6 text-sm">
-              Placeholder
+              We welcome contributions in whatever form they come. Whether you
+              want to contribute your time as a volunteer, join us as a partner
+              or donate resources towards helping us achieve our goals, there is
+              always an opportunity to make a difference.
             </p>
-            <a href="#about" className="text-purple-site py-6 font-site">
-              Our Story
+            <a href="/contact" className="text-purple-site py-6 font-site">
+              Read More
             </a>
           </div>
         </div>
       </div>
-
       <h2 className="text-3xl sm:text-5xl text-center mb-10 sm:mb-20 font-site">
-        Civic Engagement
+        2035 in Numbers
       </h2>
       <div className="flex flex-col sm:flex-row gap-8 sm:justify-between items-center font-site">
         <div className="relative text-center sm:text-left">
           <span className="text-4xl sm:text-[200px] block sm:leading-[200px] text-purple-site">
-            50
+            40K
           </span>
-          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:right-[-40px] sm:top-[190px]">
-            States
+          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:right-0 sm:top-[190px]">
+            Dollars
             <br />
-            Covered
+            Raised
           </span>
         </div>
         <div className="relative text-center sm:text-left">
           <span className="text-4xl sm:text-[200px] sm:leading-[200px] text-purple-site">
-            19K
+            8K
           </span>
           <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:top-[50px] sm:left-[130px] bg-white">
-            Cities &
+            Graduate
             <br />
-            Towns
+            Students
           </span>
         </div>
         <div className="relative text-center sm:text-left">
           <span className="text-4xl sm:text-[200px] sm:leading-[200px] text-purple-site">
-            1
+            120
           </span>
-          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:top-[130px] sm:left-[100px] bg-white">
-            Shared
+          <span className="border-t-4 block sm:inline-block border-purple-site text-xl sm:text-4xl sm:absolute sm:top-[130px] sm:left-[150px] bg-white">
+            Technology
             <br />
-            Voice
+            Centers
           </span>
         </div>
       </div>
-      
       <CarouselClient />
-
-      {/* Blank Footer */}
-      <footer className="h-20 w-full mt-10"></footer>
     </div>
   );
 }
