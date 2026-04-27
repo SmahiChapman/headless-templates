@@ -1,6 +1,6 @@
-import { CarouselClient } from '@app/components/Carousel/Carousel';
-import { WixMediaImage } from '@app/components/Image/WixMediaImage';
-import testIds from '@app/utils/test-ids';
+import { CarouselClient } from "@app/components/Carousel/Carousel";
+import { WixMediaImage } from "@app/components/Image/WixMediaImage";
+import testIds from "@app/utils/test-ids";
 
 export default function Home() {
   return (
@@ -59,7 +59,12 @@ export default function Home() {
               Our Mission
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-6">
-              Placeholder
+              Our website is designed to help young adults and first-time voters
+              find their voice in local government by educating them on their
+              rights, connecting them with their representatives, and providing
+              templates to advocate for issues they care about. This project
+              aims to show people that their voices matter and that stronger
+              connections within a community make the community itself stronger.
             </p>
           </div>
         </div>
