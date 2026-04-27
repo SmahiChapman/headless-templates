@@ -12,7 +12,7 @@ const Footer = () => (
             Contact Us
           </h2>
           <p className="text-sm sm:text-base text-slate-600 leading-6">
-            Please reach out to us with any questions or concerns. We're happy
+            Please reach out to us with any questions or concerns. We are happy
             to hear from you.
           </p>
           <p className="text-sm sm:text-base text-slate-600 leading-6">
