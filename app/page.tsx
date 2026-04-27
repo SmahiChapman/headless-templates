@@ -63,11 +63,13 @@ export default function Home() {
               to engage meaningfully with local government by making civic
               action simple, accessible, and effective.
               <br />
+              <br />
               We bridge the gap between curiosity and action by connecting young
               adults with their elected representatives, equipping them with
               ready-to-use advocacy templates tailored to the issues they care
               about most, and educating them on the state and federal rights
               they already hold.
+              <br />
               <br />
               This project aims to show people that their voices matter and that
               stronger connections within a community make the community itself
