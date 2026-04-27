@@ -5,6 +5,22 @@ import testIds from '@app/utils/test-ids';
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200/80">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center">
+                <span className="text-white font-semibold text-lg">C2C</span>
+              </div>
+              <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+                Community to Council
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* ZIP Code Search */}
       <section className="bg-white border-b border-slate-200/70">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -43,12 +59,19 @@ export default function Home() {
               Our Mission
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-6">
-              Our website is designed to help young adults and first-time voters
-              find their voice in local government by educating them on their
-              rights, connecting them with their representatives, and providing
-              templates to advocate for issues they care about. This project
-              aims to show people that their voices matter and that stronger
-              connections within a community make the community itself stronger.
+              Our mission is to empower college students and first-time voters
+              to engage meaningfully with local government by making civic
+              action simple, accessible, and effective.
+              <br />
+              We bridge the gap between curiosity and action by connecting young
+              adults with their elected representatives, equipping them with
+              ready-to-use advocacy templates tailored to the issues they care
+              about most, and educating them on the state and federal rights
+              they already hold.
+              <br />
+              This project aims to show people that their voices matter and that
+              stronger connections within a community make the community itself
+              stronger.
             </p>
           </div>
         </div>
