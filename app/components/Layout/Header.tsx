@@ -1,28 +1,21 @@
-import { NavBar } from '@app/components/Layout/NavBar/NavBar';
-import { Logo } from '@app/components/Logo/Logo';
 import testIds from '@app/utils/test-ids';
 
 const Header = () => (
   <>
     <header
-      className="w-full my-6 px-2 sm:px-8"
+      className="bg-white border-b border-slate-200/80"
       data-testid={testIds.LAYOUT.HEADER}
     >
-      <div className="flex sm:px-6 sm:px-14 h-header sm:items-center sm:gap-4 sm:gap-8">
-        <h2 className="flex-1">
-          <a
-            href="/"
-            className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6"
-          >
-            <Logo />
-            <div>
-              <span className="block font-site">ChoosEquality</span>
-              <span className="text-xs">Education for All</span>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center">
+              <span className="text-white font-semibold text-lg">C2C</span>
             </div>
-          </a>
-        </h2>
-        <div>
-          <NavBar />
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+              Community to Council
+            </h1>
+          </div>
         </div>
       </div>
     </header>
