@@ -1,4 +1,4 @@
-import testIds from "@app/utils/test-ids";
+import testIds from '@app/utils/test-ids';
 
 const Footer = () => (
   <footer
