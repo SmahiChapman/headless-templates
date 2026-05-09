@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useWixClient } from "@app/hooks/useWixClient";
+import { useState } from 'react';
+import { useWixClient } from '@app/hooks/useWixClient';
 
 export default function Home() {
   const wixClient = useWixClient();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -20,14 +20,14 @@ export default function Home() {
     try {
       // Querying the collection
       const response = await wixClient.items
-        .query("Import4")
-        .eq("title", searchTerm)
+        .query('Import4')
+        .eq('title', searchTerm)
         .find();
 
       setResults(response.items || []);
     } catch (error) {
-      console.error("Search Error:", error);
-      alert("Search failed. Check your Wix permissions.");
+      console.error('Search Error:', error);
+      alert('Search failed. Check your Wix permissions.');
     } finally {
       setIsLoading(false);
     }
@@ -52,14 +52,14 @@ export default function Home() {
                 className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500/30"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               />
               <button
                 onClick={handleSearch}
                 disabled={isLoading}
                 className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:bg-slate-400"
               >
-                {isLoading ? "Searching..." : "Find"}
+                {isLoading ? 'Searching...' : 'Find'}
               </button>
             </div>
           </div>
@@ -81,10 +81,10 @@ export default function Home() {
                   >
                     {/* Updated these lines to remove .data */}
                     <h3 className="text-indigo-600 font-bold">
-                      {item.name || "No Name Found"}
+                      {item.name || 'No Name Found'}
                     </h3>
                     <p className="text-sm text-slate-600 mt-1">
-                      Phone: {item.phone || "N/A"}
+                      Phone: {item.phone || 'N/A'}
                     </p>
                     <p className="text-[10px] text-slate-400 mt-2 uppercase">
                       Region: {item.title}
@@ -165,8 +165,8 @@ export default function Home() {
               </h3>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
                 <strong>
-                  Fundamental Rights <br /> The Right to Record:{" "}
-                </strong>{" "}
+                  Fundamental Rights <br /> The Right to Record:{' '}
+                </strong>{' '}
                 The First Amendment protects your right to take photos and
                 videos of law enforcement (police, ICE, FBI, National Guard)
                 performing their duties in public spaces like streets,
@@ -186,7 +186,7 @@ export default function Home() {
                 <br />
                 <strong>
                   Best Practices While Recording <br /> Stay Clear:
-                </strong>{" "}
+                </strong>{' '}
                 Do not interfere with or obstruct officers. They can lawfully
                 order you to move a reasonable distance away to avoid
                 interference.
@@ -209,7 +209,7 @@ export default function Home() {
                 <br />
                 <strong>
                   Interactions & Digital Safety <br /> If Stopped:
-                </strong>{" "}
+                </strong>{' '}
                 Ask, &quot;Am I free to go?&quot; If they say yes, walk away. If
                 they say no, you are being detained, but you still have the
                 right to remain silent.
