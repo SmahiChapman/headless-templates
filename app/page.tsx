@@ -138,26 +138,65 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
               <h3 className="text-sm font-medium text-slate-700 mb-2">
-                Right to Petition
+                <strong>Immigration Rights</strong>
               </h3>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
-                Placeholder
+                <strong>The Scope:</strong> This zone covers the entire border with Mexico and Canada, but also the entire coastline. 
+                This means roughly two-thirds of the U.S. population lives within this area. 
+                <br/><br/>
+                <strong>Warrantless Searches:</strong> Border Patrol can set up interior checkpoints and conduct "roving patrols," but 
+                they still generally need "reasonable suspicion" of an immigration violation or a crime to stop a vehicle.
+                <br/><br/>
+                <strong>Your Rights:</strong> Even inside this zone, you still have the right to remain silent and the right to refuse consent for 
+                a search of your belongings or vehicle (though CBP may search your vehicle anyway if they claim probable cause).
               </p>
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
               <h3 className="text-sm font-medium text-slate-700 mb-2">
-                Freedom of Speech
+                <strong>Getting Stopped by the Police</strong>
               </h3>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
-                Placeholder
+                <strong>Fundamental Rights <br/> The Right to Record: </strong>  The First Amendment protects your right to take photos and videos of 
+                law enforcement (police, ICE, FBI, National Guard) performing their duties in public spaces like streets, sidewalks, and parks.
+                <br/><br/>
+                <strong>Device Privacy:</strong> If you are not under arrest, officers need a warrant to confiscate or view the contents of your device. 
+                Even if you are arrested, they still generally need a warrant to search your phone’s data.
+                <br/><br/>
+                <strong>No Deletion:</strong> Government officials are never permitted to delete your photographs or videos under any circumstances.
+                <br/><br/>
+                <strong>Best Practices While Recording <br/> Stay Clear:</strong> Do not interfere with or obstruct officers. They can lawfully order you to move a reasonable distance away to avoid interference.
+                <br/><br/>
+                <strong>Be Open:</strong> Film openly and keep your hands visible. Avoid sudden movements that could be perceived as a threat.
+                <br/><br/>
+                <strong>Capture Details:</strong> Aim to record badge numbers, names, patrol car numbers, and any weapons or documents involved.
+                <br/><br/>
+                <strong>Preserve Evidence:</strong> Keep recordings continuous to show full context. Make copies immediately and do not edit the original files if you plan to use them as evidence.
+                <br/><br/>
+                <strong>Interactions & Digital Safety <br/> If Stopped:</strong> Ask, "Am I free to go?" If they say yes, walk away. If they say no, you are being detained, but you still have the right to remain silent.
+                <br/><br/>
+                <strong>Digital Privacy:</strong> To better protect your data, the ACLU recommends turning off biometric unlocking (fingerprint/FaceID) and using a strong passcode instead.
+                <br/><br/>
+                <strong>Obeying Orders:</strong> Even if you believe an order to move back is unlawful, it is often safer to comply while stating your compliance aloud (e.g., "I am moving back now") and documenting the interaction to challenge it later.
               </p>
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
               <h3 className="text-sm font-medium text-slate-700 mb-2">
-                Right to Assembly
+                <strong>Disability Rights</strong>
               </h3>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
-                Placeholder
+                <strong>Protection:</strong> Federal laws (like the ADA and Rehabilitation Act) protect individuals with disabilities from discrimination, segregation, and exclusion.
+                <br/><br/>
+                <strong>Scope:</strong> These rights apply to employment, housing, public spaces, voting, and even within the carceral system.
+                <br/><br/>
+                <strong>At Work:</strong> You have the right to reasonable accommodations to perform your job duties, provided they don't cause "undue hardship" for the employer. This includes the hiring process and digital applications.
+                <br/><br/>
+                <strong>Housing:</strong> It is illegal for landlords to refuse to rent to you because of a disability. You can request reasonable modifications to the physical structure or "reasonable accommodations" to rules and policies.
+                <br/><br/>
+                <strong>Public Spaces & Businesses:</strong> Private businesses that serve the public (restaurants, shops, etc.) and government buildings must be accessible and provide equal access to services.
+                <br/><br/>
+                <strong>Voting:</strong> You are entitled to an accessible polling place and the right to receive assistance with voting if needed.
+                <br/><br/>
+                <strong>Prison/Detention:</strong> People in prison retain their disability rights, including access to medical care, programs, and protection from discrimination or abuse based on their condition.
               </p>
             </div>
           </div>
