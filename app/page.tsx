@@ -148,8 +148,8 @@ export default function Home() {
                 <br />
                 <br />
                 <strong>Warrantless Searches:</strong> Border Patrol can set up
-                interior checkpoints and conduct "roving patrols," but they
-                still generally need "reasonable suspicion" of an immigration
+                interior checkpoints and conduct &quot;roving patrols,&quot; but they
+                still generally need &quot;reasonable suspicion&quot; of an immigration
                 violation or a crime to stop a vehicle.
                 <br />
                 <br />
@@ -210,7 +210,7 @@ export default function Home() {
                 <strong>
                   Interactions & Digital Safety <br /> If Stopped:
                 </strong>{' '}
-                Ask, "Am I free to go?" If they say yes, walk away. If they say
+                Ask, &quot;Am I free to go?&quot; If they say yes, walk away. If they say
                 no, you are being detained, but you still have the right to
                 remain silent.
                 <br />
@@ -222,7 +222,7 @@ export default function Home() {
                 <br />
                 <strong>Obeying Orders:</strong> Even if you believe an order to
                 move back is unlawful, it is often safer to comply while stating
-                your compliance aloud (e.g., "I am moving back now") and
+                your compliance aloud (e.g., &quot;I am moving back now&quot;) and
                 documenting the interaction to challenge it later.
               </p>
             </div>
@@ -242,15 +242,15 @@ export default function Home() {
                 <br />
                 <br />
                 <strong>At Work:</strong> You have the right to reasonable
-                accommodations to perform your job duties, provided they don't
-                cause "undue hardship" for the employer. This includes the
+                accommodations to perform your job duties, provided they don&apos;t
+                cause &quot;undue hardship&quot; for the employer. This includes the
                 hiring process and digital applications.
                 <br />
                 <br />
                 <strong>Housing:</strong> It is illegal for landlords to refuse
                 to rent to you because of a disability. You can request
                 reasonable modifications to the physical structure or
-                "reasonable accommodations" to rules and policies.
+                &quot;reasonable accommodations&quot; to rules and policies.
                 <br />
                 <br />
                 <strong>Public Spaces & Businesses:</strong> Private businesses
