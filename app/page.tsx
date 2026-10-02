@@ -3,13 +3,32 @@
 import { useState } from 'react';
 import { useWixClient } from '@app/hooks/useWixClient';
 
+type RepresentativeType =
+  'Representatives' | 'Senators' | 'Governors' | 'Mayors';
+
 export default function Home() {
   const wixClient = useWixClient();
 
+  const [repType, setRepType] = useState<RepresentativeType>('Representatives');
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+
+  const getPlaceholderText = () => {
+    switch (repType) {
+      case 'Representatives':
+        return 'Enter state or district (e.g., Alabama)...';
+      case 'Senators':
+        return 'Enter state (e.g., Alabama)...';
+      case 'Governors':
+        return 'Enter state (e.g., Alabama)...';
+      case 'Mayors':
+        return 'Enter city name...';
+      default:
+        return 'Enter state...';
+    }
+  };
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
@@ -35,29 +54,46 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <section className="bg-white border-b border-slate-200/70">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+      {/* Search Header */}
+      <section className="bg-white border-b border-slate-200/70 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900">
+            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
               Connect with Your Representatives
             </h1>
             <p className="text-slate-600">
-              Enter your full state name (e.g., Alabama)
+              Select an official type and enter your state or location to find
+              contact information.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+              <select
+                aria-label="Representative type"
+                value={repType}
+                onChange={(e) =>
+                  setRepType(e.target.value as RepresentativeType)
+                }
+                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150 sm:w-44"
+              >
+                <option value="Representatives">Representatives</option>
+                <option value="Senators">Senators</option>
+                <option value="Governors">Governors</option>
+                <option value="Mayors">Mayors</option>
+              </select>
+
               <input
                 type="text"
-                placeholder="Enter state..."
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500/30"
+                placeholder={getPlaceholderText()}
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               />
+
               <button
                 onClick={handleSearch}
                 disabled={isLoading}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:bg-slate-400"
+                className="rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500/30 disabled:bg-slate-400 transition-colors duration-150 sm:w-auto min-w-[80px]"
               >
                 {isLoading ? 'Searching...' : 'Find'}
               </button>
@@ -66,10 +102,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Results Section */}
       {hasSearched && (
         <section className="py-8 bg-slate-50">
-          <div className="mx-auto max-w-6xl px-4">
-            <h2 className="text-lg font-medium text-slate-900 mb-4">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-4">
               Results ({results.length})
             </h2>
             {results.length > 0 ? (
@@ -77,16 +114,15 @@ export default function Home() {
                 {results.map((item) => (
                   <div
                     key={item._id}
-                    className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+                    className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm"
                   >
-                    {/* Updated these lines to remove .data */}
                     <h3 className="text-indigo-600 font-bold">
                       {item.name || 'No Name Found'}
                     </h3>
                     <p className="text-sm text-slate-600 mt-1">
                       Phone: {item.phone || 'N/A'}
                     </p>
-                    <p className="text-[10px] text-slate-400 mt-2 uppercase">
+                    <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-wide">
                       Region: {item.title}
                     </p>
                   </div>
