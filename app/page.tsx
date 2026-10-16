@@ -3,32 +3,13 @@
 import { useState } from 'react';
 import { useWixClient } from '@app/hooks/useWixClient';
 
-type RepresentativeType =
-  'Representatives' | 'Senators' | 'Governors' | 'Mayors';
-
 export default function Home() {
   const wixClient = useWixClient();
 
-  const [repType, setRepType] = useState<RepresentativeType>('Representatives');
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
-
-  const getPlaceholderText = () => {
-    switch (repType) {
-      case 'Representatives':
-        return 'Enter state or district (e.g., Alabama)...';
-      case 'Senators':
-        return 'Enter state (e.g., Alabama)...';
-      case 'Governors':
-        return 'Enter state (e.g., Alabama)...';
-      case 'Mayors':
-        return 'Enter city name...';
-      default:
-        return 'Enter state...';
-    }
-  };
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
@@ -54,46 +35,29 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Search Header */}
-      <section className="bg-white border-b border-slate-200/70 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-white border-b border-slate-200/70">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900">
               Connect with Your Representatives
             </h1>
             <p className="text-slate-600">
-              Select an official type and enter your state or location to find
-              contact information.
+              Enter your full state name (e.g., Alabama)
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <select
-                aria-label="Representative type"
-                value={repType}
-                onChange={(e) =>
-                  setRepType(e.target.value as RepresentativeType)
-                }
-                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150 sm:w-44"
-              >
-                <option value="Representatives">Representatives</option>
-                <option value="Senators">Senators</option>
-                <option value="Governors">Governors</option>
-                <option value="Mayors">Mayors</option>
-              </select>
-
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
                 type="text"
-                placeholder={getPlaceholderText()}
-                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150"
+                placeholder="Enter state..."
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500/30"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               />
-
               <button
                 onClick={handleSearch}
                 disabled={isLoading}
-                className="rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500/30 disabled:bg-slate-400 transition-colors duration-150 sm:w-auto min-w-[80px]"
+                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:bg-slate-400"
               >
                 {isLoading ? 'Searching...' : 'Find'}
               </button>
@@ -102,11 +66,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Results Section */}
       {hasSearched && (
         <section className="py-8 bg-slate-50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-4">
+          <div className="mx-auto max-w-6xl px-4">
+            <h2 className="text-lg font-medium text-slate-900 mb-4">
               Results ({results.length})
             </h2>
             {results.length > 0 ? (
@@ -114,15 +77,16 @@ export default function Home() {
                 {results.map((item) => (
                   <div
                     key={item._id}
-                    className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm"
+                    className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
                   >
+                    {/* Updated these lines to remove .data */}
                     <h3 className="text-indigo-600 font-bold">
                       {item.name || 'No Name Found'}
                     </h3>
                     <p className="text-sm text-slate-600 mt-1">
                       Phone: {item.phone || 'N/A'}
                     </p>
-                    <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-wide">
+                    <p className="text-[10px] text-slate-400 mt-2 uppercase">
                       Region: {item.title}
                     </p>
                   </div>
@@ -317,42 +281,123 @@ export default function Home() {
             Communication Templates & Tips
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {/* Phone Call Tips */}
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-4">
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5">
               <div>
-                <h3 className="text-sm font-medium text-slate-700 mb-2">
-                  Phone Call Templates
+                <h3 className="text-base font-semibold text-slate-800 mb-3">
+                  Phone Call Template
                 </h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-6">
-                  Placeholder
+                <p className="text-sm text-slate-500 mb-3">
+                  Replace the bracketed text with your own information.
+                </p>
+                <div className="rounded-lg bg-slate-50 p-4 text-sm sm:text-base text-slate-700 leading-7 space-y-3">
+                  <p>
+                    Hello, I would like to make a comment to [elected official’s
+                    name] about [problem or policy].
+                  </p>
+                  <p>
+                    My name is [your full name], and I am a constituent living
+                    in [city]. I am calling to urge [elected official’s name] to
+                    support [specific action or legislation]. This matters to me
+                    because [personal reason].
+                  </p>
+                  <p>
+                    Could you share the official’s position on this issue and
+                    how they plan to address it? Thank you for taking my
+                    message.
+                  </p>
+                </div>
+                <p className="mt-2 text-xs text-slate-500">
+                  Source: Guide to Calling Your Legislators and Fact Sheet:
+                  How to Call Your Elected Officials (n.d.).
                 </p>
               </div>
               <div className="border-t border-slate-200/70 pt-4">
-                <h4 className="text-sm font-medium text-slate-700 mb-2">
+                <h4 className="text-base font-semibold text-slate-800 mb-3">
                   Tips for Effective Calls
                 </h4>
-                <p className="text-sm sm:text-base text-slate-600 leading-6">
-                  Placeholder
+                <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base text-slate-600 leading-6">
+                  <li>Be concise and state your main point early.</li>
+                  <li>
+                    Be polite; a staff member may be recording your concerns.
+                  </li>
+                  <li>
+                    Explain the issue and the specific action you want taken.
+                  </li>
+                  <li>Share a brief personal experience when relevant.</li>
+                  <li>Thank the staff member for their time.</li>
+                  <li>
+                    If you reach voicemail, leave a brief message with your
+                    reason for calling and a clear request.
+                  </li>
+                </ul>
+                <p className="mt-2 text-xs text-slate-500">
+                  Source: Guide to Calling Your Legislators (n.d.).
                 </p>
               </div>
             </div>
-
-            {/* Email Tips */}
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-4">
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5">
               <div>
-                <h3 className="text-sm font-medium text-slate-700 mb-2">
-                  Email Templates
+                <h3 className="text-base font-semibold text-slate-800 mb-3">
+                  Email Template
                 </h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-6">
-                  Placeholder
+                <p className="text-sm text-slate-500 mb-3">
+                  Customize this sample before sending it to your
+                  representative.
+                </p>
+                <div className="rounded-lg bg-slate-50 p-4 text-sm sm:text-base text-slate-700 leading-7 space-y-3">
+                  <p>Subject: Request for Support on [Bill Number or Issue]</p>
+                  <p>Dear Senator or Representative [Last Name],</p>
+                  <p>
+                    As your constituent in [city or district], I am writing to
+                    urge your support for [bill number or policy], which would
+                    [describe its purpose]. I support this action because
+                    [explain how it would affect you or your community].
+                  </p>
+                  <p>
+                    I ask that you [co-sponsor, support, or take another
+                    specific action]. Thank you for considering my views. I look
+                    forward to your response.
+                  </p>
+                  <p>
+                    Sincerely,
+                    <br />
+                    [Your Name]
+                    <br />
+                    [City or Mailing Address]
+                  </p>
+                </div>
+                <p className="mt-2 text-xs text-slate-500">
+                  Source: Benefits Protection Team Leader Tool Kit, Sample
+                  Email to Elected Officials (n.d.).
                 </p>
               </div>
               <div className="border-t border-slate-200/70 pt-4">
-                <h4 className="text-sm font-medium text-slate-700 mb-2">
+                <h4 className="text-base font-semibold text-slate-800 mb-3">
                   Tips for Effective Emails
                 </h4>
-                <p className="text-sm sm:text-base text-slate-600 leading-6">
-                  Placeholder
+                <ol className="list-decimal pl-5 space-y-2 text-sm sm:text-base text-slate-600 leading-6">
+                  <li>
+                    Write in your own words; use templates as a starting point.
+                  </li>
+                  <li>
+                    Keep the email brief, ideally no longer than one page.
+                  </li>
+                  <li>
+                    Identify yourself and your issue in the opening paragraph.
+                  </li>
+                  <li>Explain how the issue affects you or your community.</li>
+                  <li>Limit your message to your three strongest points.</li>
+                  <li>Use respectful language, even when you disagree.</li>
+                  <li>
+                    Address the official appropriately and include your
+                    location.
+                  </li>
+                  <li>
+                    Follow up respectfully after the official takes action.
+                  </li>
+                </ol>
+                <p className="mt-2 text-xs text-slate-500">
+                  Source: Silva, Tips for Effective Emails (n.d.).
                 </p>
               </div>
             </div>
@@ -367,8 +412,16 @@ export default function Home() {
             <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-4">
               About Us
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 leading-6">
-              Placeholder
+            <p className="text-sm sm:text-base text-slate-600 leading-7">
+              As college students and new voters, we know firsthand how
+              difficult it can be to find reliable information and understand
+              where to turn with questions about government. With information
+              spreading instantly across many forms of media, misinformation and
+              miscommunication can make civic participation feel overwhelming.
+              We created Community to Council to bring together clear, unbiased
+              information, representative contacts, and practical communication
+              tools so that more people can make informed decisions and feel
+              confident using their voices.
             </p>
           </div>
         </div>
