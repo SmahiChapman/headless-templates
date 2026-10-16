@@ -307,8 +307,8 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
-                  Source: Guide to Calling Your Legislators and Fact Sheet:
-                  How to Call Your Elected Officials (n.d.).
+                  Source: Guide to Calling Your Legislators and Fact Sheet: How
+                  to Call Your Elected Officials (n.d.).
                 </p>
               </div>
               <div className="border-t border-slate-200/70 pt-4">
@@ -367,8 +367,8 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
-                  Source: Benefits Protection Team Leader Tool Kit, Sample
-                  Email to Elected Officials (n.d.).
+                  Source: Benefits Protection Team Leader Tool Kit, Sample Email
+                  to Elected Officials (n.d.).
                 </p>
               </div>
               <div className="border-t border-slate-200/70 pt-4">
