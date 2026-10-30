@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactNode, type SVGProps } from 'react';
 import { useWixClient } from '@app/hooks/useWixClient';
 
 type RepresentativeType =
@@ -18,6 +18,210 @@ interface OfficialResult {
   name?: string | null;
   phone?: string | null;
   title?: string | null;
+}
+
+type IconProps = SVGProps<SVGSVGElement>;
+
+function IconBuilding(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+  );
+}
+
+function IconGlobe(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+    </svg>
+  );
+}
+
+function IconVideo(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>
+  );
+}
+
+function IconHeart(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    </svg>
+  );
+}
+
+function IconPhone(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+    </svg>
+  );
+}
+
+function IconMail(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  );
+}
+
+function IconFlag(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+    </svg>
+  );
+}
+
+function IconUsers(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+  );
+}
+
+function IconSearch(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  );
+}
+
+function IconMapPin(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+      <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  );
+}
+
+function SectionHeading({ children }: { children: ReactNode }) {
+  return (
+    <div className="mb-6 flex items-center gap-3">
+      <span
+        aria-hidden="true"
+        className="h-7 w-1.5 shrink-0 rounded-full bg-indigo-600"
+      />
+      <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+        {children}
+      </h2>
+    </div>
+  );
+}
+
+function CardHeading({
+  icon,
+  children,
+}: {
+  icon: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <div className="mb-3 flex items-center gap-3">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+        {icon}
+      </span>
+      <h3 className="text-base font-semibold text-slate-900">{children}</h3>
+    </div>
+  );
 }
 
 export default function Home() {
@@ -69,9 +273,20 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Search Header */}
-      <section className="bg-white border-b border-slate-200/70 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden border-b border-slate-200/70 bg-gradient-to-b from-indigo-50/70 via-white to-white py-12 sm:py-16">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+        >
+          <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-100/60 blur-3xl" />
+          <div className="absolute -bottom-32 -left-24 h-64 w-64 rounded-full bg-slate-200/50 blur-3xl" />
+          <div className="absolute -bottom-32 -right-24 h-64 w-64 rounded-full bg-indigo-100/40 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-6">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm">
+              <IconBuilding className="h-6 w-6" />
+            </div>
             <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
               Connect with Your Representatives
             </h1>
@@ -80,61 +295,63 @@ export default function Home() {
               contact information.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <select
-                aria-label="Representative type"
-                value={repType}
-                onChange={(e) =>
-                  setRepType(e.target.value as RepresentativeType)
-                }
-                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150 sm:w-44"
-              >
-                <option value="Representatives">Representatives</option>
-                <option value="Senators">Senators</option>
-                <option value="Governors">Governors</option>
-                <option value="Mayors">Mayors</option>
-              </select>
+            <div className="mx-auto mt-8 max-w-lg rounded-xl border border-slate-200/80 bg-white p-3 sm:p-4 shadow-md shadow-slate-200/60">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <select
+                  aria-label="Representative type"
+                  value={repType}
+                  onChange={(e) =>
+                    setRepType(e.target.value as RepresentativeType)
+                  }
+                  className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150 sm:w-44"
+                >
+                  <option value="Representatives">Representatives</option>
+                  <option value="Senators">Senators</option>
+                  <option value="Governors">Governors</option>
+                  <option value="Mayors">Mayors</option>
+                </select>
 
-              <input
-                type="text"
-                placeholder={getPlaceholderText()}
-                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              />
+                <input
+                  type="text"
+                  placeholder={getPlaceholderText()}
+                  className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                />
 
-              <button
-                onClick={handleSearch}
-                disabled={isLoading}
-                aria-busy={isLoading}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500/30 disabled:bg-slate-400 transition-colors duration-150 sm:w-auto min-w-[80px]"
-              >
-                {isLoading && (
-                  <svg
-                    className="h-4 w-4 animate-spin"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"
-                    />
-                  </svg>
-                )}
-                {isLoading ? 'Searching...' : 'Find'}
-              </button>
+                <button
+                  onClick={handleSearch}
+                  disabled={isLoading}
+                  aria-busy={isLoading}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500/30 disabled:bg-slate-400 transition-colors duration-150 sm:w-auto min-w-[80px]"
+                >
+                  {isLoading && (
+                    <svg
+                      className="h-4 w-4 animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"
+                      />
+                    </svg>
+                  )}
+                  {isLoading ? 'Searching...' : 'Find'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -144,31 +361,41 @@ export default function Home() {
       {hasSearched && (
         <section className="py-8 bg-slate-50" aria-live="polite">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-4">
-              Results ({results.length})
-            </h2>
+            <SectionHeading>Results ({results.length})</SectionHeading>
             {results.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {results.map((item, index) => (
                   <div
                     key={item._id ?? `result-${index}`}
-                    className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm"
+                    className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition-shadow duration-150 hover:shadow-md"
                   >
-                    <h3 className="text-indigo-600 font-bold">
-                      {item.name ?? ''}
-                    </h3>
-                    <p className="text-sm text-slate-600 mt-1">
-                      Phone: {item.phone ?? ''}
-                    </p>
-                    <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-wide">
-                      Region: {item.title ?? ''}
-                    </p>
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-600">
+                        {(item.name ?? '?').charAt(0).toUpperCase()}
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-base font-semibold text-indigo-600 break-words">
+                          {item.name ?? ''}
+                        </h3>
+                        <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-600">
+                          <IconPhone className="h-4 w-4 shrink-0 text-slate-400" />
+                          Phone: {item.phone ?? ''}
+                        </p>
+                        <p className="mt-2 flex items-center gap-1.5 text-xs text-slate-400 uppercase tracking-wide">
+                          <IconMapPin className="h-3.5 w-3.5 shrink-0" />
+                          Region: {item.title ?? ''}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="text-slate-500 italic py-10">
-                No results found for &quot;{searchTerm}&quot;.
+              <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-slate-200/80 bg-white py-12 text-center shadow-sm">
+                <IconSearch className="h-10 w-10 text-slate-300" />
+                <p className="italic text-slate-500">
+                  No results found for &quot;{searchTerm}&quot;.
+                </p>
               </div>
             )}
           </div>
@@ -178,10 +405,15 @@ export default function Home() {
       {/* Mission Statement */}
       <section className="py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-4">
-              Our Mission
-            </h2>
+          <div className="rounded-xl border border-slate-200/80 border-l-4 border-l-indigo-600 bg-white p-4 sm:p-5 shadow-sm">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                <IconFlag className="h-5 w-5" />
+              </span>
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+                Our Mission
+              </h2>
+            </div>
             <p className="text-sm sm:text-base text-slate-600 leading-6">
               Our mission is to empower college students and first-time voters
               to engage meaningfully with local government by making civic
@@ -206,14 +438,12 @@ export default function Home() {
       {/* Know Your Rights */}
       <section className="py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-6">
-            Know Your Rights
-          </h2>
+          <SectionHeading>Know Your Rights</SectionHeading>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
-              <h3 className="text-sm font-medium text-slate-700 mb-2">
-                <strong>Immigration Rights</strong>
-              </h3>
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition-shadow duration-150 hover:shadow-md">
+              <CardHeading icon={<IconGlobe className="h-5 w-5" />}>
+                Immigration Rights
+              </CardHeading>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
                 <strong>The Scope:</strong> This zone covers the entire border
                 with Mexico and Canada, but also the entire coastline. This
@@ -233,10 +463,10 @@ export default function Home() {
                 search your vehicle anyway if they claim probable cause).
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
-              <h3 className="text-sm font-medium text-slate-700 mb-2">
-                <strong>Getting Stopped by the Police</strong>
-              </h3>
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition-shadow duration-150 hover:shadow-md">
+              <CardHeading icon={<IconVideo className="h-5 w-5" />}>
+                Getting Stopped by the Police
+              </CardHeading>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
                 <strong>
                   Fundamental Rights <br /> The Right to Record:{' '}
@@ -300,10 +530,10 @@ export default function Home() {
                 and documenting the interaction to challenge it later.
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
-              <h3 className="text-sm font-medium text-slate-700 mb-2">
-                <strong>Disability Rights</strong>
-              </h3>
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition-shadow duration-150 hover:shadow-md">
+              <CardHeading icon={<IconHeart className="h-5 w-5" />}>
+                Disability Rights
+              </CardHeading>
               <p className="text-sm sm:text-base text-slate-600 leading-6">
                 <strong>Protection:</strong> Federal laws (like the ADA and
                 Rehabilitation Act) protect individuals with disabilities from
@@ -351,15 +581,13 @@ export default function Home() {
       {/* Templates and Tips */}
       <section className="py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-6">
-            Communication Templates & Tips
-          </h2>
+          <SectionHeading>Communication Templates &amp; Tips</SectionHeading>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5">
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5 transition-shadow duration-150 hover:shadow-md">
               <div>
-                <h3 className="text-base font-semibold text-slate-800 mb-3">
+                <CardHeading icon={<IconPhone className="h-5 w-5" />}>
                   Phone Call Template
-                </h3>
+                </CardHeading>
                 <p className="text-sm text-slate-500 mb-3">
                   Replace the bracketed text with your own information.
                 </p>
@@ -386,7 +614,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="border-t border-slate-200/70 pt-4">
-                <h4 className="text-base font-semibold text-slate-800 mb-3">
+                <h4 className="text-base font-semibold text-slate-900 mb-3">
                   Tips for Effective Calls
                 </h4>
                 <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base text-slate-600 leading-6">
@@ -409,11 +637,11 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5">
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5 transition-shadow duration-150 hover:shadow-md">
               <div>
-                <h3 className="text-base font-semibold text-slate-800 mb-3">
+                <CardHeading icon={<IconMail className="h-5 w-5" />}>
                   Email Template
-                </h3>
+                </CardHeading>
                 <p className="text-sm text-slate-500 mb-3">
                   Customize this sample before sending it to your
                   representative.
@@ -446,7 +674,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="border-t border-slate-200/70 pt-4">
-                <h4 className="text-base font-semibold text-slate-800 mb-3">
+                <h4 className="text-base font-semibold text-slate-900 mb-3">
                   Tips for Effective Emails
                 </h4>
                 <ol className="list-decimal pl-5 space-y-2 text-sm sm:text-base text-slate-600 leading-6">
@@ -482,10 +710,15 @@ export default function Home() {
       {/* About Us */}
       <section className="py-8 pb-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mb-4">
-              About Us
-            </h2>
+          <div className="rounded-xl border border-slate-200/80 border-l-4 border-l-indigo-600 bg-white p-4 sm:p-5 shadow-sm">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                <IconUsers className="h-5 w-5" />
+              </span>
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+                About Us
+              </h2>
+            </div>
             <p className="text-sm sm:text-base text-slate-600 leading-7">
               As college students and new voters, we know firsthand how
               difficult it can be to find reliable information and understand
