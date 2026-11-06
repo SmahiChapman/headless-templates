@@ -15,9 +15,67 @@ const COLLECTION_BY_TYPE: Record<RepresentativeType, string> = {
 
 interface OfficialResult {
   _id?: string;
-  name?: string | null;
-  phone?: string | null;
-  title?: string | null;
+  [key: string]: unknown;
+}
+
+// Wix imports can use different field keys across collections.
+// These aliases are fallbacks, not verified schemas for Import2/3/5.
+function getField(item: OfficialResult, keys: string[]): string {
+  for (const key of keys) {
+    const value = item[key];
+    if (typeof value === 'string' && value.trim()) return value.trim();
+    if (typeof value === 'number') return String(value);
+  }
+  return '';
+}
+
+function getOfficialName(item: OfficialResult): string {
+  const first = getField(item, ['firstName', 'first_name', 'first']);
+  const last = getField(item, ['lastName', 'last_name', 'last']);
+  return (
+    getField(item, [
+      'name',
+      'fullName',
+      'full_name',
+      'officialName',
+      'representativeName',
+      'senator',
+      'senatorName',
+      'governor',
+      'governorName',
+      'currentMayor',
+      'mayorName',
+      'Name',
+      'NAME',
+    ]) || [first, last].filter(Boolean).join(' ')
+  );
+}
+
+function getOfficialPhone(item: OfficialResult): string {
+  return getField(item, [
+    'phone',
+    'phoneNumber',
+    'phone_number',
+    'telephone',
+    'contactPhone',
+    'officePhone',
+    'phone20222',
+    'Phone',
+    'PHONE',
+  ]);
+}
+
+function getOfficialRegion(item: OfficialResult): string {
+  return getField(item, [
+    'title',
+    'state',
+    'State',
+    'region',
+    'district',
+    'city',
+    'City',
+    'location',
+  ]);
 }
 
 type IconProps = SVGProps<SVGSVGElement>;
@@ -261,9 +319,18 @@ export default function Home() {
         .eq('title', searchTerm)
         .find();
 
-      setResults((response.items as OfficialResult[]) || []);
+      const items = (response.items || []) as OfficialResult[];
+      // Inspect actual keys in the browser console if a card is still blank.
+      if (items.length > 0) {
+        console.info(
+          `[Community to Council] ${repType} fields:`,
+          Object.keys(items[0]),
+        );
+      }
+      setResults(items);
     } catch (error) {
       console.error('Search Error:', error);
+      setResults([]);
       alert('Search failed. Check your Wix permissions.');
     } finally {
       setIsLoading(false);
@@ -364,31 +431,36 @@ export default function Home() {
             <SectionHeading>Results ({results.length})</SectionHeading>
             {results.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {results.map((item, index) => (
-                  <div
-                    key={item._id ?? `result-${index}`}
-                    className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition-shadow duration-150 hover:shadow-md"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-600">
-                        {(item.name ?? '?').charAt(0).toUpperCase()}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="text-base font-semibold text-indigo-600 break-words">
-                          {item.name ?? ''}
-                        </h3>
-                        <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-600">
-                          <IconPhone className="h-4 w-4 shrink-0 text-slate-400" />
-                          Phone: {item.phone ?? ''}
-                        </p>
-                        <p className="mt-2 flex items-center gap-1.5 text-xs text-slate-400 uppercase tracking-wide">
-                          <IconMapPin className="h-3.5 w-3.5 shrink-0" />
-                          Region: {item.title ?? ''}
-                        </p>
+                {results.map((item, index) => {
+                  const name = getOfficialName(item);
+                  const phone = getOfficialPhone(item);
+                  const region = getOfficialRegion(item);
+                  return (
+                    <div
+                      key={item._id ?? `result-${index}`}
+                      className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition-shadow duration-150 hover:shadow-md"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-600">
+                          {(name || '?').charAt(0).toUpperCase()}
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="text-base font-semibold text-indigo-600 break-words">
+                            {name}
+                          </h3>
+                          <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-600">
+                            <IconPhone className="h-4 w-4 shrink-0 text-slate-400" />
+                            Phone: {phone}
+                          </p>
+                          <p className="mt-2 flex items-center gap-1.5 text-xs text-slate-400 uppercase tracking-wide">
+                            <IconMapPin className="h-3.5 w-3.5 shrink-0" />
+                            Region: {region}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-slate-200/80 bg-white py-12 text-center shadow-sm">
