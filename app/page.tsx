@@ -1,10 +1,21 @@
 'use client';
 
-import { useState, type ReactNode, type SVGProps } from 'react';
+import { useRef, useState, type ReactNode, type SVGProps } from 'react';
 import { useWixClient } from '@app/hooks/useWixClient';
+
+// Types
 
 type RepresentativeType =
   'Representatives' | 'Senators' | 'Governors' | 'Mayors';
+
+interface OfficialResult {
+  _id?: string;
+  [key: string]: unknown;
+}
+
+type IconProps = SVGProps<SVGSVGElement>;
+
+// Constants
 
 const COLLECTION_BY_TYPE: Record<RepresentativeType, string> = {
   Representatives: 'Import4',
@@ -13,13 +24,87 @@ const COLLECTION_BY_TYPE: Record<RepresentativeType, string> = {
   Mayors: 'Import2',
 };
 
-interface OfficialResult {
-  _id?: string;
-  [key: string]: unknown;
-}
+const QUERY_FIELD_BY_TYPE: Record<RepresentativeType, string> = {
+  Representatives: 'title',
+  Senators: 'title',
+  Governors: 'title',
+  Mayors: 'city',
+};
 
-// Wix imports can use different field keys across collections.
-// These aliases are fallbacks, not verified schemas for Import2/3/5.
+const STATE_NAME_BY_CODE: Record<string, string> = {
+  AL: 'Alabama',
+  AK: 'Alaska',
+  AZ: 'Arizona',
+  AR: 'Arkansas',
+  CA: 'California',
+  CO: 'Colorado',
+  CT: 'Connecticut',
+  DE: 'Delaware',
+  FL: 'Florida',
+  GA: 'Georgia',
+  HI: 'Hawaii',
+  ID: 'Idaho',
+  IL: 'Illinois',
+  IN: 'Indiana',
+  IA: 'Iowa',
+  KS: 'Kansas',
+  KY: 'Kentucky',
+  LA: 'Louisiana',
+  ME: 'Maine',
+  MD: 'Maryland',
+  MA: 'Massachusetts',
+  MI: 'Michigan',
+  MN: 'Minnesota',
+  MS: 'Mississippi',
+  MO: 'Missouri',
+  MT: 'Montana',
+  NE: 'Nebraska',
+  NV: 'Nevada',
+  NH: 'New Hampshire',
+  NJ: 'New Jersey',
+  NM: 'New Mexico',
+  NY: 'New York',
+  NC: 'North Carolina',
+  ND: 'North Dakota',
+  OH: 'Ohio',
+  OK: 'Oklahoma',
+  OR: 'Oregon',
+  PA: 'Pennsylvania',
+  RI: 'Rhode Island',
+  SC: 'South Carolina',
+  SD: 'South Dakota',
+  TN: 'Tennessee',
+  TX: 'Texas',
+  UT: 'Utah',
+  VT: 'Vermont',
+  VA: 'Virginia',
+  WA: 'Washington',
+  WV: 'West Virginia',
+  WI: 'Wisconsin',
+  WY: 'Wyoming',
+  DC: 'District of Columbia',
+};
+
+const PHONE_CALL_TEMPLATE = `Hello, I would like to make a comment to [elected official’s name] about [problem or policy].
+
+My name is [your full name], and I am a constituent living in [city]. I am calling to urge [elected official’s name] to support [specific action or legislation]. This matters to me because [personal reason].
+
+Could you share the official’s position on this issue and how they plan to address it? Thank you for taking my message.`;
+
+const EMAIL_TEMPLATE = `Subject: Request for Support on [Bill Number or Issue]
+
+Dear Senator or Representative [Last Name],
+
+As your constituent in [city or district], I am writing to urge your support for [bill number or policy], which would [describe its purpose]. I support this action because [explain how it would affect you or your community].
+
+I ask that you [co-sponsor, support, or take another specific action]. Thank you for considering my views. I look forward to your response.
+
+Sincerely,
+[Your Name]
+[City or Mailing Address]`;
+
+// Helpers
+
 function getField(item: OfficialResult, keys: string[]): string {
   for (const key of keys) {
     const value = item[key];
@@ -65,6 +150,10 @@ function getOfficialPhone(item: OfficialResult): string {
   ]);
 }
 
+function getOfficialEmail(item: OfficialResult): string {
+  return getField(item, ['email', 'emailAddress', 'contactEmail', 'Email']);
+}
+
 function getOfficialRegion(item: OfficialResult): string {
   return getField(item, [
     'title',
@@ -78,7 +167,7 @@ function getOfficialRegion(item: OfficialResult): string {
   ]);
 }
 
-type IconProps = SVGProps<SVGSVGElement>;
+// Icons
 
 function IconBuilding(props: IconProps) {
   return (
@@ -182,7 +271,7 @@ function IconMail(props: IconProps) {
   );
 }
 
-function IconFlag(props: IconProps) {
+function IconTarget(props: IconProps) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -194,7 +283,9 @@ function IconFlag(props: IconProps) {
       aria-hidden="true"
       {...props}
     >
-      <path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
     </svg>
   );
 }
@@ -251,6 +342,68 @@ function IconMapPin(props: IconProps) {
   );
 }
 
+function IconCopy(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>
+  );
+}
+
+function IconCheck(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
+// UI Components
+
+function Spinner({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className ?? 'h-4 w-4 animate-spin'}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"
+      />
+    </svg>
+  );
+}
+
 function SectionHeading({ children }: { children: ReactNode }) {
   return (
     <div className="mb-6 flex items-center gap-3">
@@ -267,9 +420,11 @@ function SectionHeading({ children }: { children: ReactNode }) {
 
 function CardHeading({
   icon,
+  action,
   children,
 }: {
   icon: ReactNode;
+  action?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -277,10 +432,42 @@ function CardHeading({
       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
         {icon}
       </span>
-      <h3 className="text-base font-semibold text-slate-900">{children}</h3>
+      <h3 className="flex-1 text-base font-semibold text-slate-900">
+        {children}
+      </h3>
+      {action}
     </div>
   );
 }
+
+function CopyButton({
+  isCopied,
+  onCopy,
+  label,
+}: {
+  isCopied: boolean;
+  onCopy: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onCopy}
+      aria-label={label}
+      aria-live="polite"
+      className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm hover:bg-slate-50 focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150"
+    >
+      {isCopied ? (
+        <IconCheck className="h-4 w-4 text-indigo-600" />
+      ) : (
+        <IconCopy className="h-4 w-4 text-slate-400" />
+      )}
+      {isCopied ? 'Copied' : 'Copy'}
+    </button>
+  );
+}
+
+// Page
 
 export default function Home() {
   const wixClient = useWixClient();
@@ -290,37 +477,81 @@ export default function Home() {
   const [results, setResults] = useState<OfficialResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [copiedTemplate, setCopiedTemplate] = useState<
+    'phone' | 'email' | null
+  >(null);
+  const copyTimerRef = useRef<number | null>(null);
 
   const getPlaceholderText = () => {
     switch (repType) {
       case 'Representatives':
-        return 'Enter state or district (e.g., Alabama)...';
+        return 'Enter state name or code…';
       case 'Senators':
-        return 'Enter state (e.g., Alabama)...';
+        return 'Enter state name or code…';
       case 'Governors':
-        return 'Enter state (e.g., Alabama)...';
+        return 'Enter state name or code…';
       case 'Mayors':
-        return 'Enter city name...';
+        return 'Enter city name…';
       default:
-        return 'Enter state...';
+        return 'Enter state name or code…';
+    }
+  };
+
+  const handleCopyTemplate = async (
+    template: 'phone' | 'email',
+    text: string,
+  ) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedTemplate(template);
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+      copyTimerRef.current = window.setTimeout(() => {
+        setCopiedTemplate(null);
+        copyTimerRef.current = null;
+      }, 2000);
+    } catch (error) {
+      console.error('Copy to clipboard failed:', error);
     }
   };
 
   const handleSearch = async () => {
-    if (!searchTerm.trim()) return;
+    const term = searchTerm.trim();
+    if (!term) return;
 
     setIsLoading(true);
     setHasSearched(true);
 
     try {
-      // Querying the collection mapped to the selected representative type
-      const response = await wixClient.items
-        .query(COLLECTION_BY_TYPE[repType])
-        .eq('title', searchTerm)
-        .find();
+      const queryField = QUERY_FIELD_BY_TYPE[repType];
+      const collection = COLLECTION_BY_TYPE[repType];
+
+      const normalized =
+        term.charAt(0).toUpperCase() + term.slice(1).toLowerCase();
+
+      const terms = new Set<string>([normalized]);
+      if (term !== normalized) {
+        terms.add(term);
+      }
+      const stateName = STATE_NAME_BY_CODE[term.toUpperCase()];
+      if (stateName) {
+        terms.add(stateName);
+      }
+
+      let query = wixClient.items
+        .query(collection)
+        .startsWith(queryField, [...terms][0]);
+
+      for (const extraTerm of [...terms].slice(1)) {
+        query = query.or(
+          wixClient.items.query(collection).startsWith(queryField, extraTerm),
+        );
+      }
+
+      const response = await query.find();
 
       const items = (response.items || []) as OfficialResult[];
-      // Inspect actual keys in the browser console if a card is still blank.
       if (items.length > 0) {
         console.info(
           `[Community to Council] ${repType} fields:`,
@@ -338,7 +569,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 antialiased">
       {/* Search Header */}
       <section className="relative overflow-hidden border-b border-slate-200/70 bg-gradient-to-b from-indigo-50/70 via-white to-white py-12 sm:py-16">
         <div
@@ -358,11 +589,11 @@ export default function Home() {
               Connect with Your Representatives
             </h1>
             <p className="text-sm sm:text-base text-slate-600 leading-6">
-              Select an official type and enter your state or location to find
+              Select an official type and enter your state or city to find
               contact information.
             </p>
 
-            <div className="mx-auto mt-8 max-w-lg rounded-xl border border-slate-200/80 bg-white p-3 sm:p-4 shadow-md shadow-slate-200/60">
+            <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-slate-200/80 bg-white p-3 sm:p-4 shadow-md shadow-slate-200/60">
               <div className="flex flex-col sm:flex-row gap-3">
                 <select
                   aria-label="Representative type"
@@ -370,9 +601,9 @@ export default function Home() {
                   onChange={(e) =>
                     setRepType(e.target.value as RepresentativeType)
                   }
-                  className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150 sm:w-44"
+                  className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 outline-none focus:ring-2 focus:ring-indigo-500/30 transition-colors duration-150 sm:w-56"
                 >
-                  <option value="Representatives">Representatives</option>
+                  <option value="Representatives">House Representatives</option>
                   <option value="Senators">Senators</option>
                   <option value="Governors">Governors</option>
                   <option value="Mayors">Mayors</option>
@@ -393,29 +624,7 @@ export default function Home() {
                   aria-busy={isLoading}
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500/30 disabled:bg-slate-400 transition-colors duration-150 sm:w-auto min-w-[80px]"
                 >
-                  {isLoading && (
-                    <svg
-                      className="h-4 w-4 animate-spin"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"
-                      />
-                    </svg>
-                  )}
+                  {isLoading && <Spinner className="h-4 w-4 animate-spin" />}
                   {isLoading ? 'Searching...' : 'Find'}
                 </button>
               </div>
@@ -428,12 +637,22 @@ export default function Home() {
       {hasSearched && (
         <section className="py-8 bg-slate-50" aria-live="polite">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <SectionHeading>Results ({results.length})</SectionHeading>
-            {results.length > 0 ? (
+            <SectionHeading>
+              {isLoading ? 'Results' : `Results (${results.length})`}
+            </SectionHeading>
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-slate-200/80 bg-white py-12 text-center shadow-sm">
+                <Spinner className="h-10 w-10 animate-spin text-indigo-600" />
+                <p className="text-sm text-slate-500">
+                  Searching for officials…
+                </p>
+              </div>
+            ) : results.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {results.map((item, index) => {
                   const name = getOfficialName(item);
                   const phone = getOfficialPhone(item);
+                  const email = getOfficialEmail(item);
                   const region = getOfficialRegion(item);
                   return (
                     <div
@@ -452,6 +671,17 @@ export default function Home() {
                             <IconPhone className="h-4 w-4 shrink-0 text-slate-400" />
                             Phone: {phone}
                           </p>
+                          {email && (
+                            <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-600 break-words">
+                              <IconMail className="h-4 w-4 shrink-0 text-slate-400" />
+                              <a
+                                href={`mailto:${email}`}
+                                className="hover:text-indigo-600 hover:underline"
+                              >
+                                {email}
+                              </a>
+                            </p>
+                          )}
                           <p className="mt-2 flex items-center gap-1.5 text-xs text-slate-400 uppercase tracking-wide">
                             <IconMapPin className="h-3.5 w-3.5 shrink-0" />
                             Region: {region}
@@ -480,7 +710,7 @@ export default function Home() {
           <div className="rounded-xl border border-slate-200/80 border-l-4 border-l-indigo-600 bg-white p-4 sm:p-5 shadow-sm">
             <div className="mb-4 flex items-center gap-3">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-                <IconFlag className="h-5 w-5" />
+                <IconTarget className="h-5 w-5" />
               </span>
               <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
                 Our Mission
@@ -657,27 +887,26 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5 transition-shadow duration-150 hover:shadow-md">
               <div>
-                <CardHeading icon={<IconPhone className="h-5 w-5" />}>
+                <CardHeading
+                  icon={<IconPhone className="h-5 w-5" />}
+                  action={
+                    <CopyButton
+                      isCopied={copiedTemplate === 'phone'}
+                      onCopy={() =>
+                        handleCopyTemplate('phone', PHONE_CALL_TEMPLATE)
+                      }
+                      label="Copy phone call template"
+                    />
+                  }
+                >
                   Phone Call Template
                 </CardHeading>
                 <p className="text-sm text-slate-500 mb-3">
                   Replace the bracketed text with your own information.
                 </p>
-                <div className="rounded-lg bg-slate-50 p-4 text-sm sm:text-base text-slate-700 leading-7 space-y-3">
-                  <p>
-                    Hello, I would like to make a comment to [elected official’s
-                    name] about [problem or policy].
-                  </p>
-                  <p>
-                    My name is [your full name], and I am a constituent living
-                    in [city]. I am calling to urge [elected official’s name] to
-                    support [specific action or legislation]. This matters to me
-                    because [personal reason].
-                  </p>
-                  <p>
-                    Could you share the official’s position on this issue and
-                    how they plan to address it? Thank you for taking my
-                    message.
+                <div className="rounded-lg bg-slate-50 p-4">
+                  <p className="whitespace-pre-line font-mono text-xs sm:text-sm text-slate-700 leading-6">
+                    {PHONE_CALL_TEMPLATE}
                   </p>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
@@ -711,33 +940,25 @@ export default function Home() {
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm space-y-5 transition-shadow duration-150 hover:shadow-md">
               <div>
-                <CardHeading icon={<IconMail className="h-5 w-5" />}>
+                <CardHeading
+                  icon={<IconMail className="h-5 w-5" />}
+                  action={
+                    <CopyButton
+                      isCopied={copiedTemplate === 'email'}
+                      onCopy={() => handleCopyTemplate('email', EMAIL_TEMPLATE)}
+                      label="Copy email template"
+                    />
+                  }
+                >
                   Email Template
                 </CardHeading>
                 <p className="text-sm text-slate-500 mb-3">
                   Customize this sample before sending it to your
                   representative.
                 </p>
-                <div className="rounded-lg bg-slate-50 p-4 text-sm sm:text-base text-slate-700 leading-7 space-y-3">
-                  <p>Subject: Request for Support on [Bill Number or Issue]</p>
-                  <p>Dear Senator or Representative [Last Name],</p>
-                  <p>
-                    As your constituent in [city or district], I am writing to
-                    urge your support for [bill number or policy], which would
-                    [describe its purpose]. I support this action because
-                    [explain how it would affect you or your community].
-                  </p>
-                  <p>
-                    I ask that you [co-sponsor, support, or take another
-                    specific action]. Thank you for considering my views. I look
-                    forward to your response.
-                  </p>
-                  <p>
-                    Sincerely,
-                    <br />
-                    [Your Name]
-                    <br />
-                    [City or Mailing Address]
+                <div className="rounded-lg bg-slate-50 p-4">
+                  <p className="whitespace-pre-line font-mono text-xs sm:text-sm text-slate-700 leading-6">
+                    {EMAIL_TEMPLATE}
                   </p>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
@@ -780,7 +1001,7 @@ export default function Home() {
       </section>
 
       {/* About Us */}
-      <section className="py-8 pb-12">
+      <section className="py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-xl border border-slate-200/80 border-l-4 border-l-indigo-600 bg-white p-4 sm:p-5 shadow-sm">
             <div className="mb-4 flex items-center gap-3">

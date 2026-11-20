@@ -25,7 +25,7 @@ const Header = () => (
                 className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-br from-white/20 to-transparent"
               />
             </div>
-            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+            <h1 className="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
               Community to Council
             </h1>
           </div>

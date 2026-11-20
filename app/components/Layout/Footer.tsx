@@ -1,5 +1,12 @@
 import testIds from '@app/utils/test-ids';
 
+const CONTACT_EMAILS: { id: string; address: string }[] = [
+  { id: 'tulabing', address: 'tulabing@chapman.edu' },
+  { id: 'smahi', address: 'smahi@chapman.edu' },
+  { id: 'jray', address: 'jray@chapman.edu' },
+  { id: 'yanwang', address: 'yanwang@chapman.edu' },
+];
+
 const Footer = () => (
   <footer
     className="relative overflow-hidden bg-white"
@@ -25,9 +32,9 @@ const Footer = () => (
       <div className="py-8">
         <div className="space-y-4">
           <div className="space-y-3">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900">
               Contact Us
-            </h2>
+            </h3>
             <div
               aria-hidden="true"
               className="h-1 w-12 rounded-full bg-indigo-600"
@@ -37,15 +44,26 @@ const Footer = () => (
             Please reach out to us with any questions or concerns. We are happy
             to hear from you.
           </p>
-          <p className="text-sm sm:text-base text-slate-600 leading-6">
-            <span className="inline-flex items-center gap-2.5 rounded-lg border border-slate-200/80 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-900 shadow-sm">
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-indigo-600"
-              />
-              Email: placeholder@placeholder.com
-            </span>
-          </p>
+
+          {/* Contact emails */}
+          <ul className="divide-y divide-slate-200/70 rounded-xl border border-slate-200/80 bg-white p-2 shadow-sm">
+            {CONTACT_EMAILS.map(({ id, address }) => (
+              <li key={id}>
+                <a
+                  href={`mailto:${address}`}
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors duration-150 hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-indigo-500/30"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-600"
+                  />
+                  <span className="text-sm font-medium text-slate-900">
+                    {address}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="mt-8 border-t border-slate-200/70 pt-6">

@@ -1,6 +1,9 @@
 import './globals.css';
 import Footer from '@app/components/Layout/Footer';
 import Header from '@app/components/Layout/Header';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 /**
  * Using force dynamic so changes in business assets (e.g. services) are immediately reflected.
@@ -14,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
         <title>Community to Council</title>
         <meta
@@ -28,10 +31,8 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_WIX_CLIENT_ID ? (
           <>
             <Header />
-            <main className="bg-white min-h-[600px]">{children}</main>
-            <div className="mt-10 sm:mt-20">
-              <Footer />
-            </div>
+            <main>{children}</main>
+            <Footer />
           </>
         ) : (
           <div className="bg-white min-h-[600px] max-w-5xl mx-auto p-5">
